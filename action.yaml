@@ -1,0 +1,12 @@
+name: Check SHA Length
+description: Check if the commit SHA is of the 40 character length
+runs:
+  using: composite
+  steps:
+    - name: Check SHA length
+      run: |
+        if [ $( expr length ${{ github.event.inputs.git-sha }} ) -ne 40 ]; then
+          echo "SHA length needs to be 40 characters long."
+          exit 1
+        fi
+      shell: bash
